@@ -4,17 +4,17 @@
 /* Layout: airy white page with blush and mint washes. Hero with script-style eyebrow and a heart ornament, a sticky frosted bar (tabs, search, filter, jump), then category sections as hairline name lists sorted 가나다. One light look, two pastel brand accents. */
 :root{
   --bg:#fffefe; --surface:#ffffff; --fg:#3b3541; --muted:#8b8592; --line:#f0e4e9;
-  --le-fill:#f9dfe8; --le-ink:#b0446d; --vg-fill:#d5eee7; --vg-ink:#2c7a6d;
-  --accent-fill:var(--le-fill); --accent:var(--le-ink);
+  --le-fill:#f9dfe8; --le-ink:#b0446d; --vg-fill:#e6defa; --vg-ink:#6a4fb1;
+  --accent-fill:var(--le-fill); --accent:var(--le-ink); --wash:#e9f6f2;
   --font-body:"Noto Sans KR",system-ui,-apple-system,"Malgun Gothic",sans-serif;
   --font-display:"Noto Serif KR","Batang",serif;
   --font-script:"Cormorant Garamond","Noto Serif KR",Georgia,serif;
   color-scheme:light;
 }
-:root[data-tab="vg"]{--accent-fill:var(--vg-fill);--accent:var(--vg-ink)}
+:root[data-tab="vg"]{--accent-fill:var(--vg-fill);--accent:var(--vg-ink);--wash:#ece5fb}
 *{box-sizing:border-box}
 body{margin:0;color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.55;padding-inline:20px;padding-block:0 72px;
-  background:radial-gradient(52rem 26rem at 6% -8%,#fdeef3 0%,rgba(253,238,243,0) 62%),radial-gradient(46rem 24rem at 100% 2%,#e9f6f2 0%,rgba(233,246,242,0) 60%),radial-gradient(40rem 22rem at 50% 0%,#f3effc 0%,rgba(243,239,252,0) 65%),#fffefe;
+  background:radial-gradient(52rem 26rem at 6% -8%,#fdeef3 0%,rgba(253,238,243,0) 62%),radial-gradient(46rem 24rem at 100% 2%,var(--wash) 0%,transparent 60%),radial-gradient(40rem 22rem at 50% 0%,#f3effc 0%,rgba(243,239,252,0) 65%),#fffefe;
   background-color:var(--bg)}
 .page{max-width:980px;margin-inline:auto}
 .hero{padding-block:52px 30px;text-align:center}
