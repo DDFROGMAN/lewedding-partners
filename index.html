@@ -35,11 +35,23 @@ a.chip:hover{filter:brightness(1.1)}
 span.chip{background:var(--chip-off);color:var(--muted)}
 .note{color:var(--muted);font-size:.8rem;margin:10px 0 0}
 #empty{color:var(--muted);padding-block:32px;text-align:center}
+</style>
+<style>
+.tabs{display:flex;gap:8px;margin:0 0 10px}
+.tabs button{flex:1;font:inherit;font-weight:500;padding:9px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.jump button{flex:none;font:inherit;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:none;border:0;border-bottom:2px solid transparent;padding:4px 0;margin-right:8px;cursor:pointer}
+.jump button:hover{color:var(--accent);border-color:var(--accent)}
 </style></head><body>
 
 <div class="wrap">
   <header class="top">
     <h1>PARTNERS</h1>
+    <div class="tabs" role="tablist">
+      <button id="tab-le" role="tab" type="button">르웨딩플랜</button>
+      <button id="tab-vg" role="tab" type="button">베리굿웨딩</button>
+    </div>
     <input id="q" type="search" placeholder="업체 이름 검색" autocomplete="off" aria-label="업체 이름 검색">
     <nav class="jump" id="jump"></nav>
   </header>
@@ -200,7 +212,7 @@ var L={
 "아프롬":"https://www.instagram.com/aplomb_official/",
 "이경민포레부산센텀점":"https://www.instagram.com/leekyungminwedding_centum/",
 "이경민포레청담점":"https://www.instagram.com/lkmforetwedding/"
-};
+};;
 var S=[
 {id:"studio",title:"STUDIO",groups:[
  {sub:"리허설 스튜디오",names:"FANU,고유,그레이스케일,꼬모스튜디오,노아고즈,노우드스튜디오,노트레세느,논코니엘,클로드 (청담,논현),느와르블랑하우스,다다스튜디오,라앤디,라크마스튜디오,로그에이,리저브,메종드소울페이지,멜로필드,멜린스튜디오,모닌,목화,무이스튜디오,바로오늘이그날,박개인주의,발렌,보어하우스,볼라르,부겐빌리아,비마이,비비엔다,세미앙,소네,소르아,소피소,스튜디오네쥬,스튜디오아이브,스튜디오이오,스튜디오콜레트,스튜디오피프티,아우드스튜디오,아테소,아트버스터픽쳐,알리아,앤드류권,어바이드,에버른,유온드,이경호포토그라피,이브로제하우스,일드한남,줄리의정원,지엥마지,클레브스튜디오,테이크마인드,피아스튜디오,헤이스,헤이쥬드,헤이허니,스튜디오아누,스튜디오라운"},
@@ -209,38 +221,60 @@ var S=[
 {id:"hm",title:"H / M",groups:[{names:"AbyBOM,강은,김유리브라이드(광주),김청경헤어페이스,꼼나나,더페트라,드레스먼,드이희,로나,룰루,마린뷰티하우스(부산),미파레,밈,서의,선화청담,순수,아나뷰티,아티시차차,알루,애브뉴준오,에포트,윤쌀롱,이경민포레부산센텀점,이경민포레청담점,정남,정샘물인스피레이션,제이에스엘스튜디오,커뮌,프랜스,프헤,히나프"}]},
 {id:"suit",title:"SUIT & TUXEDO",groups:[{names:"라비첸토,로드앤테일러,루스트로,루카무제오,리휴,바톤권오수,보타이비스포크,블랙공,슈트더블유,아르니스,아르코발레노,아프롬,에스코티지,정성비스포크,제네리꼬,코르시카,테일러룸스,페이레네,포튼가먼트,해리슨테일러"}]}
 ];
+var VG=[{"id":"studio","title":"STUDIO","items":[["스투디오사이",null],["박개인주의스튜디오","https://www.instagram.com/individual_ism.official/"],["바오그스튜디오",null],["노호트리",null],["비포원스튜디오",null],["꼬모스튜디오","https://www.instagram.com/ccomostudio_official/"],["이오스튜디오",null],["노올스튜디오",null],["지엥마지","https://obrapictures.co.kr/SIEN-MARGE"],["비비엔다스튜디오","https://www.instagram.com/vivienda_st/"],["목화스튜디오","https://www.mokhwastudio.com"],["소율스튜디오",null],["헤로하우스",null],["이브로제하우스","https://obrapictures.co.kr/YVESROSE-HAUS"],["노아고즈","https://www.instagram.com/noah_goz/"],["헤이쥬드스튜디오","https://www.instagram.com/heyjude_st/"],["세미앙스튜디오","https://www.instagram.com/_semia.n/"],["라앤디스튜디오","https://www.laendy.com"],["에버른스튜디오","https://www.instagram.com/everne_studio/"],["아우라스튜디오",null],["줄리의정원","https://www.juliecnc.co.kr/"],["글렌하우스",null],["아르센스튜디오",null],["일드한남","https://www.instagram.com/ile_de_hannam/"],["모닌스튜디오","https://www.instagram.com/moninstudio/"],["원규스튜디오",null],["비슈어스튜디오",null],["미세인트",null],["다다아트포토그라피",null],["볼라르스튜디오","https://www.instagram.com/studio__volare/"],["스튜디오셀린",null],["스튜디오아이브","https://www.studioive.co"],["앤드류권","https://www.andrewkwon.co.kr/"],["부겐빌리아","https://www.instagram.com/bougain.villea35/"],["리저브하우스","https://www.instagram.com/reserve_studio/"],["메종드힐",null],["식스플로어",null],["아오베하임",null],["유하하우스",null],["루미에르레브",null],["바시움스튜디오",null],["아포제스튜디오",null],["비마이스튜디오","https://www.instagram.com/_bemy_studio/"],["라크마스튜디오","https://www.instagram.com/lacmastudio/"],["어바웃제인",null],["프라베소스튜디오","https://www.instagram.com/plabeso_studio/"],["클레이앤클레어","https://www.instagram.com/clayandclare/"],["클레브스튜디오","https://clevestudio.com/"],["어바이드스튜디오","https://www.instagram.com/abyde.official/"],["멜레보하우스",null],["아테소","https://www.instagram.com/ateso_official/"],["스튜디오에밀리","https://www.stemily.co.kr"],["피아스튜디오","https://www.instagram.com/fia_studio_/"],["페레스튜디오","http://studioferre.co.kr/default/"],["디하우스","https://dhaus.co.kr/default/"],["아우드스튜디오","https://aoudstudio.com/"],["소에브스튜디오","https://www.instagram.com/soevstudio/"],["코얼스튜디오",null],["해밀스튜디오","https://www.haemillstudio.kr"],["노트레세느","https://www.notre-scene.com"],["그온스튜디오","https://www.instagram.com/gue_on.studio.official/"],["제스쳐스튜디오","https://www.gesture-studio.kr/About"],["고야시그니처","https://www.instagram.com/goya_signature_studio/"],["바이니엘","https://www.instagram.com/viniel.st/"],["논코니엘","https://www.instagram.com/nonco_niel/"],["발렌스튜디오","https://valenestudio.com"],["준유스튜디오","https://www.instagram.com/juneyoo_studio/"],["온뜰에피움","https://www.instagram.com/pium_studio/"],["에스티정우","https://stjungwoo.co.kr"],["빌라이나모라레","https://www.villainnamorare.com/guide"],["틸른스튜디오","https://www.instagram.com/tiln.official/"],["르안스튜디오","https://www.instagram.com/studio_le.an_official/"],["CN스튜디오","https://cnstudio.co.kr/studio.html"],["헤이허니스튜디오","https://www.instagram.com/heyhoney_st/"],["아트버스터픽쳐","https://www.instagram.com/artbuster_picture/"],["마디브스튜디오","https://www.instagram.com/madive.official/"],["스튜디오사하","https://www.instagram.com/saha_semi/"],["지지오티더하우스","https://www.instagram.com/ggot_thehouse/"],["로라스튜디오","https://www.instagram.com/laura_studio.seoul/"],["원세컨드스튜디오","https://www.instagram.com/onesecondstudio/"],["제이로그",null],["연가스튜디오","https://www.instagram.com/yeonga.studio/"],["제주무드케이","https://www.instagram.com/mood__k/"],["료필름","https://www.instagram.com/ryo.film__/"],["무이스튜디오한남",null],["소르아","https://www.sorrawedding.com"],["클레스튜디오",null],["보어하우스","https://www.instagram.com/vohr.kr/"],["그레이스케일","https://www.instagram.com/grayscale_st/"],["스튜디오콜레트","https://studiocolette.co.kr/"],["알리아스튜디오","https://www.instagram.com/aalia_official_/"],["노우드하우스","https://www.instagram.com/noudhaus/"],["로그에이","https://www.studiologa.com"],["라뮤즈스튜디오","https://www.instagram.com/lamuze_studio_/"],["루미에스튜디오","https://www.lumierestudio.co.kr/"],["오브스튜디오",null],["유온드포토그라피","https://www.instagram.com/uond.photography/"],["테오그라피","https://www.instagram.com/theography_official/"],["로에빈스튜디오","https://www.instagram.com/loevin_official/"],["가을스튜디오","https://gaeulstudio.co.kr/"],["더브라이드스튜디오","https://www.instagram.com/thebride_gaeul/"],["스튜디오클로드청담","https://www.studioclaude.co.kr/"],["봉스튜디오","http://studiobong.com/"],["레아누아",null],["라흐스튜디오","https://rah-studio.co.kr/"],["강릉비엔토스튜디오","https://www.instagram.com/vientostudio_/"],["버드투블룸","http://www.budtobloom.co.kr/"],["세인트무드","https://stmood.co.kr"],["무이스튜디오유엔빌리지","http://mui.co.kr"],["테이크마인드","https://takemind.co.kr/"],["플로우스튜디오","https://www.instagram.com/flow_photost/"],["이경호포토그라피","https://www.leekyungho-photograph.com/"],["이포토에세이","http://www.ephotoessay.com"],["에끌라하우스","https://www.eclathaus.co.kr"],["스튜디오비비",null],["라망스튜디오","https://www.instagram.com/lamantstudio_official/"],["영포토그라피","https://www.instagram.com/young_photography_w/"],["더청담스튜디오","https://www.thechungdamstudio.com"],["파누","https://www.instagram.com/fanu.studio/"],["어뮤즈하우스","https://www.instagram.com/amusehaus/"],["로맨틱애비뉴","https://www.instagram.com/romantic_avenue_official/"],["WS스튜디오","https://wsdesignstudio.kr"],["소피소스튜디오","https://www.instagram.com/soffiso_official_/"],["스튜디오네쥬","https://www.instagram.com/nejue_official_/"],["셀럽비비","http://celuvvivi.com"],["로브아스튜디오","https://www.instagram.com/lovah_studio/"],["메종드소울페이지","http://soulpage.co.kr"],["바닐라페이퍼하우스",null],["더앤드유스튜디오","https://www.theandu.com/studio"],["성수리애스튜디오","https://www.instagram.com/leeae_official/"],["아카이브비","https://www.instagram.com/archive_boda/"],["로렌하우스","https://www.instagram.com/rorenhouse_official/"],["아우어스튜디오","https://www.instagram.com/ourstudio_official/"],["메리골드스튜디오","http://marigoldst.co.kr/2015/"],["메리미용마",null],["미루스튜디오","https://www.instagram.com/_studio_miru/"],["뷰시엘스튜디오","https://www.instagram.com/beauciel_st/"],["모노그램스튜디오","https://monogramstudio.kr/"],["모노페이퍼스튜디오",null],["무이스튜디오남산","http://www.mui.co.kr/"],["에이쥬스튜디오","https://www.azustudio.com/"],["메리드하우스","https://www.instagram.com/marriedhaus/"],["멜린스튜디오","https://www.instagram.com/mellinstudio/"],["스튜디오고유",null],["드마레스튜디오","https://www.demare.co.kr"],["어반스튜디오","https://www.instagram.com/urbanstudio_official/"],["아우어스위트홈","https://www.instagram.com/ourstudio_official/"],["바닐라페이퍼스튜디오","https://www.instagram.com/vanilla_paper_studio/"],["조안스튜디오","https://www.instagram.com/joan_weddingstudio/"],["아르모스튜디오","https://litt.ly/armostudio"],["스튜디오호안","https://www.instagram.com/studiohoan/"],["구호스튜디오","https://www.kuhostudio.com/kr"],["실버문스튜디오",null],["제주공일사진관","https://www.instagram.com/studio__01/"]]},{"id":"dress","title":"DRESS","items":[["베네트","https://www.instagram.com/bennette.official/"],["소노","https://www.instagram.com/bridal_sono/"],["황정아웨딩","https://www.instagram.com/hwangjeongah_official/"],["에일린","https://www.instagram.com/aileen_couture/"],["더화이트엘리자베스","https://www.instagram.com/thewhite.elisabeth/"],["셀레브브라이덜","https://sesreves.net/"],["핑크공브라이드","https://www.instagram.com/pinkongbride/"],["브라이덜공","http://www.bridalkong.com/"],["클라우디아","http://www.claudiacompany.com/"],["레하마리벨르","https://www.instagram.com/lera_mariebelle/"],["이승진웨딩","https://leeseungjin.com/"],["레이앤코","https://www.instagram.com/raynco_official/"],["시작바이이명순","https://www.instagram.com/czacc_official/"],["프리다브라이덜","https://www.instagram.com/fridabridal_official/"],["켈리손윤희","https://www.instagram.com/sonyunhui/"],["아틀리에쿠","https://www.instagram.com/atelierku_official/"],["제이미브라이드","https://jaymibride.com"],["케일라베넷","https://www.instagram.com/kaylabennet_official/"],["아뜰리에오화","https://www.instagram.com/atelier_ohwa/"],["로즈로사","https://www.instagram.com/roserosa.wedding/"],["브라이드손윤희","https://www.instagram.com/bridesonyunhui/"],["엔조에디트",null],["엔조최재훈","https://www.instagram.com/choijaehoon.official/"],["메종레브","https://revesbridal.co.kr/main.html"],["레아레브","https://www.instagram.com/reareve_official/"],["이룬","https://www.instagram.com/eloon_official/"],["쥬빌리브라이드","https://www.instagram.com/jubilee.bride/"],["아벨바이케이","https://linktr.ee/abelbyk"],["르메르바이노비아","https://www.lemere.co.kr/"],["엘리자베스럭스","https://www.instagram.com/luxe.elisabeth/"],["비바탐탐","https://www.vivatamtam.com/intro"],["클라라웨딩","http://www.clarawedding.co.kr/"],["르블랑웨딩","http://www.leblancdress.com/"],["에스메랄다","https://www.instagram.com/esmeralda_sposa_official/"],["브라이덜온유","https://www.instagram.com/bridalonu_official/"],["라포레","https://laporet.co.kr/"],["모네뜨아르","http://monetteare.co.kr/"],["이브스더데이","https://www.instagram.com/eves.theday/"],["르온","https://www.instagram.com/leon__official_/"],["레비크","https://revique.kr/"],["렌느브라이덜","https://www.reinebridal.com/"],["아르하","https://www.arhabridal.co.kr"],["에스띠아","https://www.instagram.com/hestia_bride/"],["우아르",null],["보네르","https://bonheur.kr/"],["셀렉션h","https://www.instagram.com/selectionh/"],["드이베","https://deibeseoul.co.kr"],["아뜰리에로리에","https://www.instagram.com/atelierlaurier_official/"],["아비가일","https://www.instagram.com/avigail.wedding/"],["스포사리니아","https://www.instagram.com/sposa_linea_official/"],["헤리티크뉴욕","https://www.heritique.com/brand.html"],["리로카세레모니",null],["벨린메종드마리에","https://velindress.com/"],["니니슈아","https://www.instagram.com/ninichoix_official/"],["제시카로렌","https://www.instagram.com/jessicalauren_official_/"],["니콜스포사","https://www.instagram.com/nicolesposa_weddingdress/"],["마로브","https://www.instagram.com/marobebridal_official/"],["디유드라포엠","https://www.instagram.com/dieu_de_lapoeme_official/"],["에토프꾸띄르","https://www.instagram.com/etoffecouture_official/"],["마이도터스웨딩","https://www.instagram.com/mydaughters_wedding/"],["럭스가든웨어",null],["시그니처엘리자베스","https://www.instagram.com/signature.elisabeth/"],["이주웨딩","https://www.instagram.com/yijudress_official/"],["루이즈블랑","https://www.instagram.com/louisblanc_bride/"],["브라이드로체","https://www.rochedress.com/"],["손윤희컨템포러리","https://www.instagram.com/sonyunhuishop/"],["폴라리스웨딩",null],["더에이미","https://houseofamy.com"],["브라이드메르시",null],["메라키웨딩",null],["엘리브브라이덜",null],["세인트헬레나",null],["시즌알렉스","https://www.instagram.com/seasonalex_official/"],["레이나모라",null],["보니타베일리",null],["부산페어리앙",null],["마틴드세븐",null],["제주고지형웨딩라인",null],["르네아뜰리에",null],["리휴",null],["디케웨딩",null],["클라인브라이덜",null],["보에브라이덜",null],["로브드K","https://www.robedek.com/"],["누벨드블랑",null],["디아일","http://www.theaisle.co.kr/"],["위드브라이드",null],["펠리스노비아",null],["발레리아스포사","http://www.weawon.co.kr/"],["안나스포사","https://www.instagram.com/annasposaclassic/"],["디아시바이주","https://www.instagram.com/darcy__official/"],["브라이덜수지","https://www.instagram.com/bridal_suji/"],["모니카블랑쉬","https://monicablanche.com/"],["아이테오","http://www.aiteo.kr/"],["플로렌스","https://florencewedding.co.kr/brand"],["크리드제이","https://creedj.com/"],["하우스오브에이미","https://houseofamy.com"],["러브지제주",null],["더케네스블랑","http://www.thekennethblanc.com/"],["벨에포크","https://epoquewed.com/"],["셀린아뜰리에","https://www.instagram.com/celineatelier_wedding/"],["제이스포사","https://www.instagram.com/jsposa_wedding/"],["메이제인바이김영주",null],["알렉산드라","http://alexandra.co.kr/index.php"],["브라이드영","https://www.instagram.com/brideyoung_/"],["블랑늘","http://www.blancneul.com/"],["장다인웨딩","http://www.jangdainwedding.co.kr/"],["리디아브라이드","https://www.instagram.com/lydiabride_official/"],["로자스포사","https://www.instagram.com/rosasposadress/"],["제주유일","https://www.instagram.com/jeju_you1/"],["조슈아벨","https://joshuabellebridal.com/"]]},{"id":"hm","title":"H / M","items":[["커뮌","https://www.instagram.com/commune_hairmakeup/"],["아티디",null],["서의","https://www.instagram.com/seoui_wed/"],["애브뉴준오","https://www.junohair.com/avenuejuno"],["미파레","https://www.instagram.com/me.parer_wedding/"],["밈","https://www.instagram.com/mimm_wedding/"],["컷루스","https://www.instagram.com/cutloose_wed/"],["김청경헤어페이스","http://www.kimchungkyung.co.kr/"],["정샘물인스피레이션",null],["히나프","https://www.instagram.com/hinaf.official/"],["에이바이봄",null],["뷰티진동희청담점","https://www.instagram.com/beautyjindonghee/"],["아르즈청담",null],["룰루","https://www.instagram.com/lulu_wedding/"],["정남","https://www.instagram.com/jungnam_wedding/"],["라메종뷰티","https://www.instagram.com/lamaison_bride/"],["알루","https://aluu.co.kr/"],["보이드바이박철",null],["꼼나나청담",null],["요닝","https://www.instagram.com/yoningwedding/"],["프랜스","https://www.instagram.com/merry_prance/"],["설영","https://seolyoung.today/reserve5"],["컬처앤네이처","https://www.facebook.com/culturesns/"],["이경민포레청담",null],["포레스타블랙","https://www.instagram.com/foresta.wedding/"],["히솝메이크업","https://pf.kakao.com/_xbzbmxb/posts"],["프헤","https://www.instagram.com/frais_seoul/"],["김선진끌로에","https://www.instagram.com/cloe_kr/"],["선화청담","https://www.instagram.com/sunhwa_cheongdam/"],["그날",null],["치치라보","https://www.instagram.com/chichilabo_wedding/"],["청담이유","https://www.instagram.com/eyou_wedding/"],["빈헤어앤메이크업","http://vinhairmakeup.com/"],["조이187인스타점",null],["재클린","https://www.instagram.com/jacqueline__wedding/"],["쌤시크블랙",null],["제니하우스청담힐",null],["위스도산","https://www.instagram.com/wythedosan_official/"],["강은","http://kangeun.com/wedding_bridal"],["롤링제이","https://www.instagram.com/rollingjay_beauty/"],["위위아뜰리에",null],["르보청담","https://www.instagram.com/lebeau__wedding/"],["순수본점","https://www.soonsoobeauty.com/"],["에스토브","https://www.instagram.com/s.tob_wedding_/"],["노멀샵","https://www.instagram.com/normalshop_wedding/"],["라라피엠","https://www.instagram.com/rarapm_wedding_official/"],["메이븐","https://www.instagram.com/mavenwedding/"],["쌩크드보떼플러스","https://www.cinq.co.kr/"],["칼라빈",null],["플리페","https://www.instagram.com/pllipe_hair.makeup/"],["케이트뷰티","https://www.instagram.com/k.art_beauty/"],["이경민포레홍대점","http://www.foret.kr/portfolios/hongdae2/"],["클라우티청담","https://www.instagram.com/cloutii_wedding_/"],["로쉬","https://roshhairmakeup.com/"],["아도르청담","https://www.instagram.com/adore_hairmakeup/"],["조이187스타점(청담)",null],["청담러비","https://www.instagram.com/lovey_wedding/"],["에이라빛","https://www.instagram.com/alabit_official/"],["인천로즈1225","https://www.instagram.com/rose1225_official/"],["윤쌀롱","https://www.yoonssalon.com"],["유림메이크업앤헤어","https://www.instagram.com/urim_wedding/"],["바이엘린","https://www.instagram.com/byelin_wedding/"],["드이희","https://www.instagram.com/deihee_wedding/"],["로나청담",null],["히엘",null],["아디도",null],["아나뷰티","https://www.instagram.com/ana_beauty_/"],["고센뷰티",null],["엘루스제이청담점",null],["엘루스제이",null],["봉살롱",null],["더페트라강릉",null],["더페트라","https://www.instagram.com/thepetra_official/"],["쉬작",null],["꼼나나본점",null],["제이와이",null],["고원",null],["이엘헤어메이크업",null],["앳나운플레이스",null],["엘페라",null],["비올",null],["꾸띠원",null],["겐그레아",null],["탁살롱",null]]}];
+function uniq(arr){var s={},o=[];arr.forEach(function(x){if(!s[x[0]]){s[x[0]]=1;o.push(x)}});return o}
+function leData(){
+  return S.map(function(s){return{id:s.id,title:s.title,groups:s.groups.map(function(g){
+    var names=g.names.split(",").map(function(n){return n.trim()}).filter(function(n){return n!=="논현)"}).map(function(n){return n==="클로드 (청담"?"클로드 (청담,논현)":n});
+    return{sub:g.sub,items:uniq(names.map(function(n){return[n,L[n]||null]}))}
+  })}})
+}
+var DATA={le:leData(),vg:VG.map(function(s){return{id:s.id,title:s.title,groups:[{items:uniq(s.items)}]}})};
 var list=document.getElementById("list"),jump=document.getElementById("jump"),q=document.getElementById("q"),empty=document.getElementById("empty");
-function chip(n){
-  var u=L[n],e;
+var cur="le";
+function chip(n,u){
+  var e;
   if(u){e=document.createElement("a");e.href=u;e.target="_blank";e.rel="noopener noreferrer";
     e.appendChild(document.createTextNode(n));
     var t=document.createElement("i");t.textContent=u.indexOf("instagram.com")>-1?"IG":"WEB";e.appendChild(t);
   }else{e=document.createElement("span");e.textContent=n}
   e.className="chip";e.dataset.n=n.toLowerCase();return e;
 }
-S.forEach(function(s){
-  var sec=document.createElement("section");sec.id=s.id;
-  var h=document.createElement("h2");h.textContent=s.title;var c=document.createElement("small");h.appendChild(c);sec.appendChild(h);
-  var seen={};
-  s.groups.forEach(function(g){
-    if(g.sub){var h3=document.createElement("h3");h3.textContent="+ "+g.sub;sec.appendChild(h3)}
-    var box=document.createElement("div");box.className="chips";
-    g.names.split(",").forEach(function(n){ if(n==="클로드 (청담")n="클로드 (청담,논현)"; if(n==="논현)"||seen[s.id+g.sub+n])return; seen[s.id+g.sub+n]=1; box.appendChild(chip(n)); });
-    sec.appendChild(box);
+function render(tab){
+  cur=tab;list.textContent="";jump.textContent="";
+  document.getElementById("tab-le").setAttribute("aria-selected",tab==="le");
+  document.getElementById("tab-vg").setAttribute("aria-selected",tab==="vg");
+  DATA[tab].forEach(function(s){
+    var sec=document.createElement("section");sec.id=tab+"-"+s.id;
+    var h=document.createElement("h2");h.textContent=s.title;var c=document.createElement("small");h.appendChild(c);sec.appendChild(h);
+    s.groups.forEach(function(g){
+      if(g.sub){var h3=document.createElement("h3");h3.textContent="+ "+g.sub;sec.appendChild(h3)}
+      var box=document.createElement("div");box.className="chips";
+      g.items.forEach(function(it){box.appendChild(chip(it[0],it[1]))});
+      sec.appendChild(box);
+    });
+    list.appendChild(sec);
+    var b=document.createElement("button");b.type="button";b.textContent=s.title;
+    b.addEventListener("click",function(){sec.scrollIntoView({behavior:"smooth",block:"start"})});
+    jump.appendChild(b);
   });
-  list.appendChild(sec);
-  var a=document.createElement("a");a.href="#"+s.id;a.textContent=s.title;jump.appendChild(a);
-});
+  count();
+  try{localStorage.setItem("partnersTab",tab)}catch(e){}
+}
 function count(){
   var t=q.value.trim().toLowerCase(),any=false;
-  S.forEach(function(s){
-    var sec=document.getElementById(s.id),n=0;
+  DATA[cur].forEach(function(s){
+    var sec=document.getElementById(cur+"-"+s.id),n=0;
     sec.querySelectorAll(".chip").forEach(function(c){var ok=!t||c.dataset.n.indexOf(t)>-1;c.hidden=!ok;if(ok)n++});
     sec.querySelectorAll("h3").forEach(function(h){var box=h.nextElementSibling;h.hidden=!box.querySelector(".chip:not([hidden])")});
     sec.hidden=n===0;sec.querySelector("small").textContent=n+"곳";if(n)any=true;
   });
   empty.hidden=any;
 }
-q.addEventListener("input",count);count();
+document.getElementById("tab-le").addEventListener("click",function(){render("le")});
+document.getElementById("tab-vg").addEventListener("click",function(){render("vg")});
+q.addEventListener("input",count);
+var start="le";try{var sv=localStorage.getItem("partnersTab");if(sv==="le"||sv==="vg")start=sv}catch(e){}
+render(start);
 </script>
 </body></html>
